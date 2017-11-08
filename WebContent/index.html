@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="utf-8" />
+		<title>postMessage サンプル</title>
+		<style>
+			#messages {
+				word-wrap: break-word;
+			}
+		</style>
+	</head>
+	<body>
+		<form method="get">
+			<input type="button" id="openChild1" value="子画面1を開く" />
+			<input type="button" id="openChild2" value="子画面2を開く" />
+			<input type="button" id="openChild3" value="子画面3を開く" />
+			<input type="button" id="reload" value="リロード" />
+		</form>
+		<div id="messages">
+		</div>
+
+		<script src="js/jquery-3.2.1.min.js"></script>
+		<script src="js/postMessage.js"></script>
+		<script>
+			$(function() {
+
+				let wndManger = new WndManger();
+
+				let features = {
+						"width": 200,
+						"height": 200,
+					};
+
+				$("#openChild1").on("click", function() {
+					let features_ = $.extend({}, features, { "left": 100 });
+					wndManger.open("child.html", "child1", features_, function (data) {
+						$("#messages").append($("<span>").text("[子画面1:" + data.fromChild + "]"));
+					});
+				});
+
+				$("#openChild2").on("click", function() {
+					let features_ = $.extend({}, features, { "left": 200 });
+					wndManger.open("child.html", "child2", features_, function (data) {
+						$("#messages").append($("<span>").text("[子画面2:" + data.fromChild + "]"));
+					});
+				});
+
+				$("#openChild3").on("click", function() {
+					let features_ = $.extend({}, features, { "left": 300 });
+					wndManger.open("child.html", "child3", features_, function (data) {
+						$("#messages").append($("<span>").text("[子画面3:" + data.fromChild + "]"));
+					});
+				});
+
+				$("#reload").on("click", function () {
+					window.location.reload(true);
+				});
+
+			});
+		</script>
+	</body>
+</html>

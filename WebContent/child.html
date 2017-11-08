@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="utf-8" />
+		<title>postMessage サンプル</title>
+	</head>
+	<body>
+		<div>
+			<input type="button" id="yesButton" value="はい" />
+			<input type="button" id="noButton" value="いいえ" />
+		</div>
+
+		<script src="js/jquery-3.2.1.min.js"></script>
+		<script src="js/postMessage.js"></script>
+		<script>
+			$(function() {
+
+				$("#yesButton").on("click", function() {
+					MessageUtils.postMessage({
+						"fromChild": "はい"
+					});
+				});
+
+				$("#noButton").on("click", function() {
+					MessageUtils.postMessage({
+						"fromChild": "いいえ"
+					});
+				});
+
+			});
+		</script>
+	</body>
+</html>

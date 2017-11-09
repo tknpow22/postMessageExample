@@ -163,6 +163,7 @@ class WndManger {
 
 		let self = this;
 
+		//window.addEventListener("message", (event) => {	// アロー関数の場合
 		window.addEventListener("message", function (event) {
 
 			try {
@@ -175,6 +176,8 @@ class WndManger {
 					return;
 				}
 
+				// アロー関数で定義するならば this を定義時に束縛するので this.wndInfos_ と記述可能
+				//let wndInfo = this.wndInfos_.findByWnd(event_source);
 				let wndInfo = self.wndInfos_.findByWnd(event_source);
 				if (wndInfo != null) {
 					let data = $.parseJSON(event_data);
